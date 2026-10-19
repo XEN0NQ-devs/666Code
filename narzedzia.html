@@ -62,7 +62,6 @@ section{padding:90px 0;scroll-margin-top:70px}
 .page-title{font-size:2.8rem;font-weight:900;margin-bottom:25px}
 .rules-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:35px;display:flex;flex-direction:column;gap:22px}
 .rule-item h3{font-size:1.2rem;color:var(--red);margin-bottom:6px}.rule-item p{color:var(--muted);font-size:.95rem}
-/* narzędzia */
 .tools-tabs{display:flex;gap:10px;background:var(--card);border:1px solid var(--border);padding:8px;border-radius:12px;margin:30px 0 40px;overflow-x:auto}
 .tab-btn{background:transparent;border:none;color:var(--muted);padding:10px 18px;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap}
 .tab-btn:hover{color:var(--text)}
@@ -307,7 +306,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:60px 5%
     mt.addEventListener('click',()=>menu.classList.toggle('open'));
     menu.addEventListener('click',e=>{ if(e.target.closest('a')) menu.classList.remove('open'); });
   }
-  // podświetlanie sekcji w menu (tylko strona główna)
   const secs=document.querySelectorAll('main section[id]');
   if(secs.length){
     const links={home:'nav-home',oferta:'nav-oferta',opinie:'nav-opinie'};
@@ -334,21 +332,18 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:60px 5%
 <script>
 (function(){
 const $=id=>document.getElementById(id);
-// zakładki
 document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.tool-view').forEach(v=>v.classList.remove('active-tool'));
   document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
   $(b.dataset.tool).classList.add('active-tool'); b.classList.add('active');
 }));
 
-// ---------- SMALL CAPS ----------
 const sc={a:'ᴀ',b:'ʙ',c:'ᴄ',d:'ᴅ',e:'ᴇ',f:'ꜰ',g:'ɢ',h:'ʜ',i:'ɪ',j:'ᴊ',k:'ᴋ',l:'ʟ',m:'ᴍ',n:'ɴ',o:'ᴏ',p:'ᴘ',q:'ǫ',r:'ʀ',s:'ꜱ',t:'ᴛ',u:'ᴜ',v:'ᴠ',w:'ᴡ',x:'x',y:'ʏ',z:'ᴢ'};
 $('inputText').addEventListener('input',()=>{
   $('outputText').value=[...$('inputText').value.toLowerCase()].map(c=>sc[c]||c).join('');
 });
 $('copySmallCapsBtn').addEventListener('click',()=>copyText($('outputText').value,$('copySmallCapsText')));
 
-// ---------- GRADIENT ----------
 let gradColors=['#e11d2e','#ff6a3d','#ffffff'];
 const gfmt={bold:false,underline:false,strike:false,italic:false};
 const hexRe=/^#[0-9a-f]{6}$/i;
@@ -399,7 +394,6 @@ $('gradFormat').addEventListener('change',updateGrad);
 $('copyGradBtn').addEventListener('click',()=>copyText($('gradOutput').value,$('copyGradText')));
 renderGradColors();
 
-// ---------- PREFIX ----------
 const F={
 A:[[0,1,1,1,0],[1,0,0,0,1],[1,1,1,1,1],[1,0,0,0,1],[1,0,0,0,1]],B:[[1,1,1,1,0],[1,0,0,0,1],[1,1,1,1,0],[1,0,0,0,1],[1,1,1,1,0]],
 C:[[0,1,1,1,1],[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[0,1,1,1,1]],D:[[1,1,1,1,0],[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1],[1,1,1,1,0]],
@@ -461,7 +455,6 @@ $('downloadPngBtn').addEventListener('click',()=>{
 });
 drawRank();
 
-// ---------- MOTD ----------
 const MC={'0':'#000000','1':'#0000aa','2':'#00aa00','3':'#00aaaa','4':'#aa0000','5':'#aa00aa','6':'#ffaa00','7':'#aaaaaa','8':'#555555','9':'#5555ff',a:'#55ff55',b:'#55ffff',c:'#ff5555',d:'#ff55ff',e:'#ffff55',f:'#ffffff'};
 let active=$('motdLine1');
 ['motdLine1','motdLine2','motdHover'].forEach(id=>{$(id).addEventListener('focus',()=>active=$(id));$(id).addEventListener('input',updateMotd);});
@@ -506,7 +499,6 @@ $('copyMotdBtn').addEventListener('click',()=>copyText($('motdPropertiesOutput')
 $('copyHoverBtn').addEventListener('click',()=>copyText($('motdHover').value,$('copyHoverText')));
 updateMotd();
 
-// ---------- PIXEL ART ----------
 const pc=$('pixelartCanvas'), pctx=pc.getContext('2d'), N=16, PS=24;
 const blank=()=>Array.from({length:N},()=>Array(N).fill(null));
 let grid=blank(), undo=[], redo=[], tool='pencil', down=false, pz=24;
